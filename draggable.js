@@ -91,7 +91,7 @@ function setSize(w,h){
 	workspace.css("top",(gposy+npy)+"px");
 }
 
-function setPos(x,y){
+function setPosition(x,y){
 
 	var cx = parseInt(dragger.css("left"),10);
 	var cy = parseInt(dragger.css("top"),10);
