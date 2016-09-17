@@ -23,6 +23,7 @@ dragger.mousedown(function(e){
 	sx = parseInt(workspace.css("left"),10);
 	sy = parseInt(workspace.css("top"),10);
 	isc = true;
+  return false;
 });
 
 dragger.mouseup(function(e){
