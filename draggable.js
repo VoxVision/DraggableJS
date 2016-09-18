@@ -5,8 +5,10 @@
 
 var workspace = $("#grid");
 var dragger = $("#container");
+var item = $(".block");
 
 var isc = false;
+var dclick = false;
 var sx = 0;
 var sy = 0;
 
@@ -16,28 +18,37 @@ var cy = 0;
 var snx = parseInt(dragger.css("left"),10);
 var sny = parseInt(dragger.css("top"),10);
 
-dragger.mousedown(function(e){
-  cx = e.pageX - $(this).offset().left;
-  cy = e.pageY - $(this).offset().top;
+
+function onDragStart(e) {
+	dclick = false;
+	cx = e.pageX - $(dragger).offset().left;
+	cy = e.pageY - $(dragger).offset().top;
 	sx = parseInt(workspace.css("left"),10);
 	sy = parseInt(workspace.css("top"),10);
 	isc = true;
-  return false;
-});
+	return false;
+}
 
-dragger.mouseup(function(e){
+function onDragStop(e) {
 	isc = false;
-});
+}
 
-dragger.mouseover(function(e){
- isc = false;
-});
+function onDragOver(e) {
+	var lf = parseInt(dragger.css("left"),10);
+	var tp = parseInt(dragger.css("top"),10);
+	var wd = parseInt(dragger.css("width"),10);
+	var hg = parseInt(dragger.css("height"),10);
+	
+	if(!(e.pageX > lf && e.pageX < lf+wd  &&   e.pageY > tp && e.pageY < tp+hg))
+		isc = false;
+}
 
-dragger.mousemove(function(e){
+function onDragMove(e) {
 	if(isc)
 	{
-		var nx = cx - e.pageX + $(this).offset().left;
-		var ny = cy - e.pageY + $(this).offset().top;
+		dclick = true;
+		var nx = cx - e.pageX + dragger.offset().left;
+		var ny = cy - e.pageY + dragger.offset().top;
 		var gbx = parseInt(workspace.css("width"),10)-snx;
 		var gby = parseInt(workspace.css("height"),10)-sny;
 		var cbx = parseInt(dragger.css("width"),10);
@@ -60,6 +71,21 @@ dragger.mousemove(function(e){
 		workspace.css("left",rx+"px");
 		workspace.css("top",ry+"px");
 	}
+}
+
+dragger.mousedown(onDragStart);
+dragger.mouseup(onDragStop);
+dragger.mouseleave(onDragOver);
+dragger.mousemove(onDragMove);
+
+item.mousedown(onDragStart);
+item.mouseup(onDragStop);
+item.mouseleave(onDragOver);
+item.mousemove(onDragMove);
+
+item.click(function(e){
+	if(dclick)
+		e.preventDefault();
 });
 
 function setSize(w,h){
