@@ -3,16 +3,15 @@
   Licensed under the GNU General Public License 3
 */
 
+var workspace = $("#grid");
+var dragger = $("#container");
+
 var isc = false;
 var sx = 0;
 var sy = 0;
 
 var cx = 0;
 var cy = 0;
-
-
-var workspace = $("#grid");
-var dragger = $("#container");
 
 var snx = parseInt(dragger.css("left"),10);
 var sny = parseInt(dragger.css("top"),10);
