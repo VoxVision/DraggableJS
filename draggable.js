@@ -5,7 +5,6 @@
 
 var workspace = $("#grid");
 var dragger = $("#container");
-var item = $(".block");
 
 var isc = false;
 var dclick = false;
@@ -31,16 +30,6 @@ function onDragStart(e) {
 
 function onDragStop(e) {
 	isc = false;
-}
-
-function onDragOver(e) {
-	var lf = parseInt(dragger.css("left"),10);
-	var tp = parseInt(dragger.css("top"),10);
-	var wd = parseInt(dragger.css("width"),10);
-	var hg = parseInt(dragger.css("height"),10);
-	
-	if(!(e.pageX > lf && e.pageX < lf+wd  &&   e.pageY > tp && e.pageY < tp+hg))
-		isc = false;
 }
 
 function onDragMove(e) {
@@ -73,17 +62,12 @@ function onDragMove(e) {
 	}
 }
 
-dragger.mousedown(onDragStart);
-dragger.mouseup(onDragStop);
-dragger.mouseleave(onDragOver);
-dragger.mousemove(onDragMove);
+$(document).mouseup(onDragStop);
+$(document).mousemove(onDragMove);
 
-item.mousedown(onDragStart);
-item.mouseup(onDragStop);
-item.mouseleave(onDragOver);
-item.mousemove(onDragMove);
+workspace.mousedown(onDragStart);
 
-item.click(function(e){
+workspace.click(function(e){
 	if(dclick)
 		e.preventDefault();
 });

@@ -16,13 +16,11 @@
  }
 
  #container {
-   position: relative;
-   background: gray;
-   opacity: 0.8;
    width: 1000px;
    height: 400px;
    top: 200px;
    left: 100px;
+   z-index: -100;
  }
 
  .block {
@@ -35,12 +33,24 @@
    left: 600px;
    z-index: 1;
  }
+ 
+  .block2 {
+   position: relative;
+   display: block;
+   width: 100px;
+   height: 100px;
+   background: red;
+   top: 370px;
+   left: 540px;
+   z-index: 1;
+ }
 
 </style>
 </head>
 <body>
 <div id="grid">
-  <a href="" class="block"></a>
+  <a href="" class="block"><span>YASbDASDJASKDASHDHDUUWDHIQWUHDQHDIQUDHUsj</span></a>
+  <a href="" class="block2"><span>YASbDASDJASKD</span></a>
 </div>
 <div id="container"></div>
 </body>
